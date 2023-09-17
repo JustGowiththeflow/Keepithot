@@ -121,7 +121,7 @@ function App() {
         {topImages.map((image) => (
           <li key={image.id}>
             {image.name}
-            {/* {image.name} - Selected {image.rating} times */}
+            {image.name} - Selected {image.rating} times
           </li>
         ))}
       </ul>
