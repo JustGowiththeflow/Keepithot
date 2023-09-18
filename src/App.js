@@ -4,13 +4,13 @@ import 'firebase/compat/firestore';
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyB1uhoiwz31PIZXGFC2EP-VQ-ksWmN2AR0",
-  authDomain: "keepithot-92bc6.firebaseapp.com",
-  projectId: "keepithot-92bc6",
-  storageBucket: "keepithot-92bc6.appspot.com",
-  messagingSenderId: "355924487061",
-  appId: "1:355924487061:web:bfdd70d8c6d65886efa49c",
-  measurementId: "G-YYB4DZK90P"
+  apiKey: "AIzaSyAIl5Q7dBSg8W-G7QP1Ig1Z0BFDScc2FME",
+  authDomain: "justkeepwithit.firebaseapp.com",
+  projectId: "justkeepwithit",
+  storageBucket: "justkeepwithit.appspot.com",
+  messagingSenderId: "1037600894931",
+  appId: "1:1037600894931:web:97a36dfe3c335c6da60926",
+  measurementId: "G-ZSBZ98W4M2"
 };
 
 if (!firebase.apps.length) {
