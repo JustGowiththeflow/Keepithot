@@ -18,10 +18,37 @@ if (!firebase.apps.length) {
 }
 
 const db = firebase.firestore();
+const importAll = (r) => {
+  return r.keys().map((item) => ({
+    id: item.replace('./', '').replace(/\..*$/, ''), // Create an ID based on the file name
+    url: r(item), // Get the URL of the image
+  }));
+};
+
+// Load all images from the Keepithot folder
+const imagesArray = importAll(require.context('./Keepithot', false, /\.(png|jpe?g|svg)$/));
 
 function App() {
-  const [images, setImages] = useState([]);
   const [imagePair, setImagePair] = useState([]);
+
+  useEffect(() => {
+    // Initially set the image pair when the component mounts
+    const randomImagePair = getRandomImagePair(imagesArray);
+    setImagePair(randomImagePair);
+  }, []);
+
+  const getRandomImagePair2 = (imageList) => {
+    const shuffledImages = [...imageList].sort(() => Math.random() - 0.5);
+    return shuffledImages.slice(0, 2); // Get two random images
+  };
+
+  const handleImageClick2 = () => {
+    // Get a new random image pair when any image is clicked
+    const randomImagePair = getRandomImagePair(imagesArray);
+    setImagePair(randomImagePair);
+  };
+  const [images, setImages] = useState([]);
+  // const [imagePair, setImagePair] = useState([]);
   const [topImages, setTopImages] = useState([]);
   
   useEffect(() => {
@@ -46,6 +73,8 @@ function App() {
 
     fetchImages();
   }, []);
+
+  
 
   const getRandomImagePair = (imageList) => {
     const shuffledImages = [...imageList].sort(() => Math.random() - 0.5);
@@ -94,6 +123,7 @@ function App() {
     setImagePair(randomImagePair);
     setTopImages(topImageDocs);
   };
+  
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column' }}>
@@ -106,11 +136,9 @@ function App() {
     <div className="App" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
       
       <div className="image-pair" style={{ display: 'flex', gap: '20px' }}>
-        {imagePair.map((image) => (
-          <div key={image.id} onClick={() => handleImageClick(image)} style={{ textAlign: 'center' }}>
-            <img src={image.url} alt={`Image ${image.id}`} width={300} />
-            <p><b>{image.name}</b></p>
-            {/* <p>Rating: {image.rating}</p> */}
+      {imagePair.map((image) => (
+          <div key={image.id} onClick={handleImageClick2} style={{ textAlign: 'center' }}>
+            <img src={image.url} alt={`Image ${image.id}`} width={500} />
           </div>
         ))}
       </div>
